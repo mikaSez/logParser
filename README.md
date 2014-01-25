@@ -1,12 +1,27 @@
-logParser
+textParser
 =========
 
-A fast javascript logparser
+A textFilter
 
+Current tasks : 
+ speed-up : required. (mouseMove was a bad idea ...)
+ adding-functionnality: required.
+ refactor: required. 
+ documentation: required.
+ tests: required. 
+  
+	
+ 
 
 TODO : 
-
--the parser ...
+be able to work with constantly updated fields.
+expand close lines.
+remove filters.
+show curent filter.
+input for costum filters.
+option for case-insensitive filter.
+some test framework
+organize functions
 
 
 Contents: 
@@ -18,6 +33,5 @@ What will be implemented one day :
 
 -Options passing
 -Tokenizer
--Map based ordered word storage (for fast search access), a binary tree maybe (black-red ?)
 -real-time loader.
 -stream-reading ?
