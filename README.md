@@ -1,19 +1,21 @@
 textParser
 =========
 
-A textFilter
+<h2>A textFilter</h2>
 
-Current tasks : 
- speed-up : required. (mouseMove was a bad idea ...)
- adding-functionnality: required.
- refactor: required. 
- documentation: required.
- tests: required. 
+<h3>Current tasks :</h3> 
+ <strong>speed-up : </strong>required. (mouseMove was a bad idea ...)<br/>
+  <strong>adding-functionnality: </strong> required.<br/>
+  <strong>refactor: </strong> required. <br/>
+  <strong>documentation:  </strong>required.<br/>
+  <strong>tests:  </strong>required. <br/>
+ 
+  
   
 	
  
 
-TODO : 
+<h3>TODO :</h3> 
 be able to work with constantly updated fields.
 expand close lines.
 remove filters.
@@ -24,12 +26,12 @@ some test framework
 organize functions
 
 
-Contents: 
+<h3>Contents: </h3>
 
 Parsing-tokenizer intended for big log files. 
 
 
-What will be implemented one day : 
+<h4>What will be implemented one day :</h4> 
 
 -Options passing
 -Tokenizer
