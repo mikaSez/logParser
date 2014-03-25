@@ -1,30 +1,30 @@
-    'use strict';
-    Object = function(){
-        /*working with multiple methods with same name, used basically for api */
-      this.addMethod = function(object, name, fn){
-       var old = object[ name ];
-      object[ name ] = function(){
-        if ( fn.length === arguments.length ){
-            return fn.apply( this, arguments );
-        } else if ( typeof old === "function" )
-          /*apply usage everywhere else not suitable :
+
+	Object = function(){
+		/*working with multiple methods with same name, used basically for api */
+	this.addMethod = function(object, name, fn){ 
+	  var old = object[ name ]; 
+	  object[ name ] = function(){ 
+	    if ( fn.length == arguments.length )  
+	      return fn.apply( this, arguments ); 
+	    else if ( typeof old === "function" ) 
+          /*apply usage everywhere else not suitable : 
             https://bugs.webkit.org/show_bug.cgi?id=80797
             */
-           return old.apply( this, arguments );
-        };
-        };
-      	 /*last prime*/
-     	 this.merge = function (root){
+	      return old.apply( this, arguments ); 
+	    }; 
+		 }, 
+		 /*last prime*/
+		 this.merge = function (root){ 
 
 		  for ( var i = 1; i < arguments.length; i++ ) 
 		    for ( var key in arguments[i] ) 
 		      root[key] = arguments[i][key]; 
 		  return root; 
-		}
+		} 
 	} 
 
-	function PerValue() {
-		var values = [];
+	function perValue() {
+		var values = new Array();
 		/*unique per default*/
 		this.append = function(value){
 			if(values.indexOf(value) ==-1)
@@ -36,13 +36,11 @@
 		}
 	}
 
-
     function Logger(){
-     var words = [];
-     var lines = [];
+     var words = new Array(); 
+     var lines = new Array();
      var actingOn;
      var currentElement;
-     var lastTime;
      var curentLineId = 1;
      var defaultOptions = {
      	'feeder' : 'pre',
@@ -57,34 +55,8 @@
      };
 
     var lineContainer = function(){
-        var lineText = '';
-        var lineSpanned = '';
-        return {
-            getTextLine : function(){
-                return lineText;
-            },
-            getLineSpanned : function(){
-                return lineSpanned;
-            },
-            setTextLine : function(line){
-                lineText = line;
-            },
-            setLineSpanned : function(line){
-                lineSpanned = line;
-            }
-        }
-    };
-
-    var timeLapse = function(){
-        if(lastTime === undefined){
-            lastTime = new Date();
-        } else {
-            var temp = new Date();
-            var total = temp.getTime() - lastTime.getTime();
-            lastTime = undefined;
-            return total;
-           
-        }
+        lineText = '',
+        lineSpanned = ''
     };
 
     var addWordToDictionnary = function(word){
@@ -119,12 +91,13 @@
 
      var actOnEachLine = function(element){
         var tempLines = element.innerHTML.replace(/\r\n/g, "\n").split("\n");
-       
         return proceedActing(tempLines, function(elem){
-             
             var temp = new lineContainer();
             
             //FIXME bad syntax
+
+            temp.lineText = createElement('div',elem, curentLineId);
+            temp.lineText.setAttribute("class", defaultOptions.textLineClass);
 
             temp.setTextLine(createElement('div',elem, curentLineId));
             temp.getTextLine().setAttribute("class", defaultOptions.textLineClass);
@@ -133,10 +106,16 @@
             var tempArray = actOnEachToken(elem);
 
              var tempCont = "";
+
+             var tempCont = "";
             for (var i = 0; i < tempArray.length; i++) {
                 if(tempArray[i]){
                     tempCont += '<span>' + tempArray[i] + '</span>' + ' ';
+                    tempCont += '<span>' + tempArray[i] + '</span>' + ' ';
                 }
+            };
+             spanned.innerHTML += tempCont;
+            temp.lineSpanned = spanned; 
             }
              spanned.innerHTML += tempCont;
             temp.setLineSpanned(spanned);
@@ -203,6 +182,7 @@
             }
             //FIXME ugly hack
             document.getElementById(i+'').setAttribute("style", "display:none;");
+            console.log(lines[i]);
 
         };
     };
@@ -274,19 +254,17 @@
         if(actingOn.length === undefined){
            actOnEachLine(actingOn);
         }else {
-
-      
             /**FIXME: l'ordre n'est pas assuré*/
            var elements = this.makeArray(actingOn);
            var i = elements.length;
 
            while(i--)
               actOnEachLine(elements[i]);
-          
         }
          
         console.log("parsing time :" + timeLapse());
         timeLapse();
+         
         this.prepend();
         /*addEventListener/atachEvent not needed here i think*/
         defaultOptions.reciever.onmousemove=  this.hoverHandler;
@@ -296,6 +274,7 @@
         }
          console.log("appending time :" + timeLapse());
          console.log("totalLines : " + lines.length);
+         console.log("appending time :" + timeLapse());
      }),
      /*remove an element from dom and kill all references to it*/
      this.addMethod(this, "removeSource", function(){

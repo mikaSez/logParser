@@ -4,7 +4,7 @@ textParser
 <h2>A textFilter</h2>
 
 <h3>Current tasks :</h3> 
- <strong>speed-up : </strong>required. (mouseMove was a bad idea ...)<br/>
+ <strong>speed-up : </strong>need faster it on webkit, firefox actually is fast enough<br/>
   <strong>adding-functionnality: </strong> required.<br/>
   <strong>refactor: </strong> required. <br/>
   <strong>documentation:  </strong>required.<br/>
